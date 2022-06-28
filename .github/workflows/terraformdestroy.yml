@@ -1,19 +1,17 @@
-name: 'Terraform-apply'
+name: 'Terraform-destroy'
 
 on: 
-  # workflow_dispatch:
-  push: 
-    branches :
-    - main
-
+  workflow_dispatch:
+    
 env:
   BUCKET: s3-for-assignment
   TFSTATE_FILE: terraform.tfstate
   DB_TABLE: NehLata-table
 
 jobs:
-  terraform:
+  terraform-destroy:
     runs-on: ubuntu-latest
+
 
     defaults:
       run:
@@ -39,13 +37,6 @@ jobs:
        -backend-config="key=$TFSTATE_FILE" 
        -backend-config="dynamodb_table=$DB_TABLE"
 
-    - name: terraform-plan
-      id: plan
-      run: 
-        terraform plan -no-color
-
-    - name: terraform-apply
-      id: apply
-      run:
-        terraform apply -auto-approve
-
+    - name: Terraform destroy
+      id: destroy
+      run: terraform destroy -auto-approve
