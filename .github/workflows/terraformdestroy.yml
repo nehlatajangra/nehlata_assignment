@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     
 env:
-  BUCKET: s3-for-assignment
+  BUCKET: nls3
   TFSTATE_FILE: terraform.tfstate
-  DB_TABLE: NehLata-table
+  DB_TABLE: nl-table
 
 jobs:
   terraform-destroy:
